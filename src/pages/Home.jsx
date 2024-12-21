@@ -1,69 +1,52 @@
 import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast"; // For notifications
 import corporategifting from "/assets/Corporategifting.png";
+import aboutus from "/assets/aboutus.png";
 import stationery from "/assets/Stationery.png";
 import electronics from "/assets/Electronics.png";
 import { HashLink as Link } from "react-router-hash-link";
 
+import Corporate from "/assets/Corporategifting.png";
+import OfficeEssentials from "/assets/OfficeEssentials.png";
+import Electronics from "/assets/Electronics.png";
+import Apparels from "/assets/Apparels.png";
+import Signages from "/assets/Signages.png";
+import LeatherProducts from "/assets/LeatherProducts.png";
+
+import client1 from "/assets/client1.png";
+import client4 from "/assets/client4.png";
+import client5 from "/assets/client5.png";
+import client6 from "/assets/client6.png";
+import client7 from "/assets/client7.png";
+import client8 from "/assets/client8.png";
+import client9 from "/assets/client9.png";
+import client10 from "/assets/client10.png";
+import client11 from "/assets/client11.png";
+import client12 from "/assets/client12.png";
+import client13 from "/assets/client13.png";
+import client14 from "/assets/client14.png";
+import client15 from "/assets/client15.png";
 import { MdDesignServices } from "react-icons/md";
 import { IoRibbon } from "react-icons/io5";
 import { FaTruckFast } from "react-icons/fa6";
 import { RiDiscountPercentFill } from "react-icons/ri";
 
 const Home = () => {
-  const [clientImages, setClientImages] = useState([]);
-  const [error, setError] = useState(null);
-
-  const [products, setProducts] = useState([]); // State to store products
-  const [loading, setLoading] = useState(true); // State for loading
-  useEffect(() => {
-    // Fetch logos from the backend
-    const fetchLogos = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/logos`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch logos");
-        }
-
-        const data = await response.json();
-        const imageUrls = data.map(
-          (logo) => `${import.meta.env.VITE_API_URL}/uploads/${logo.filename}`
-        ); // Adjust URL to your backend's file path
-        setClientImages(imageUrls);
-      } catch (error) {
-        console.error("Error fetching logos:", error);
-        setError("Failed to load logos.");
-
-        toast.error("Failed to load logos. Please try again later.");
-      }
-    };
-
-    fetchLogos();
-  }, []);
-
-  useEffect(() => {
-    const fetchLatestProducts = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/latest/products`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
-        setProducts(data); // Store the fetched products
-      } catch (error) {
-        console.error("Error fetching latest products:", error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching
-      }
-    };
-
-    fetchLatestProducts(); // Call the function to fetch latest products
-  }, []);
+  const clientImages = [
+    client1,
+    client4,
+    client5,
+    client6,
+    client7,
+    client8,
+    client9,
+    client10,
+    client11,
+    client12,
+    client13,
+    client14,
+    client15,
+  ];
 
   const [formData, setFormData] = useState({
     name: "",
@@ -83,64 +66,19 @@ const Home = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/contact`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-
-      // Reset form after successful submission
-      setFormData({
-        name: "",
-        phone: "",
-        companyName: "",
-        email: "",
-        budget: "",
-        giftsNeeded: "",
-        message: "",
-      });
-
-      toast.success("Form submitted successfully!");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error("Failed to submit the form.");
-    }
-  };
-
   const categories = [
-    {
-      title: "Corporate Gifting",
-      image: corporategifting,
-      link: "/categories/Corporate Gift",
-    },
-    {
-      title: "Stationery",
-      image: stationery,
-      link: "/categories/Stationery",
-    },
-    {
-      title: "Electronics",
-      image: electronics,
-      link: "/categories/Electronics",
-    },
+    { name: "Corporate Gifts", image: Corporate },
+    { name: "Office Essentials", image: OfficeEssentials },
+    { name: "Electronics", image: Electronics },
+    { name: "Apparels", image: Apparels },
+    { name: "Signages", image: Signages },
+    { name: "Leather Products", image: LeatherProducts },
   ];
 
   return (
     <>
       {/* HOME SECTION  */}
-      <div className="homepage" id="home"></div>
+      <div className="homepage" id="home" ></div>
 
       <div className="whyus">
         <h1 className="heading1">Why Choose Us</h1>
@@ -164,25 +102,21 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="about-section">
-        <div className="about-us">
-          <div className="about-content">
-            <h1 className="about-title">Welcome to Imprints INC</h1>
-            <h2 className="about-subtitle">Having 10 Years of Experience</h2>
-            <p className="about-description">
-              Imprints INC is engaged in the business of corporate gifting,
-              known for supplying unbeatable business promotional products that
-              have made an indelible impact across industry verticals. Our
-              commitment to excellence & passion for quality products has shown
-              us the way to growth & prosperity. Our huge range of products
-              includes stationery items, corporate gifts, clothing, signages,
-              electronics, etc.
-            </p>
-          </div>
+      <div className="categories-container" id="categories">
+        <h1 className="heading1">Our Categories</h1>
+        <div className="categories-flex">
+          {categories.map((category, index) => (
+            <div key={index} className="category-item">
+              <div className="category-border">
+                <img src={category.image} alt={category.name} />
+                <p>{category.name}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="clients">
+      <div className="clients" id="clients">
         <h1 className="heading1">Clients That Trust Us</h1>
         <div className="slider">
           <div className="logos">
@@ -200,6 +134,31 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="about-section" id="about">
+        <h2 className="heading1">About Us</h2>
+        <div className="about-container">
+          <div className="about-content">
+            <h1 className="about-title">We have 15+ Years of Experience</h1>
+            <p className="about-description">
+              Imprints INC is engaged in the business of corporate gifting,
+              known for supplying unbeatable business promotional products that
+              have made an indelible impact across industry verticals. Our
+              commitment to excellence & passion for quality products have shown
+              us the way to growth & prosperity. Our huge range of products
+              includes stationery items, corporate gifts, clothing, signages,
+              electronics, etc.
+            </p>
+          </div>
+          <div className="about-image">
+            <img
+              src={aboutus}
+              alt="A gift box with Imprints INC branding"
+              className="about-img"
+            />
+          </div>
+        </div>
+      </div>
+
       <div className="contact" id="contact">
         <Toaster />
         <div className="contact-container">
@@ -207,7 +166,7 @@ const Home = () => {
           <p className="contact-subheading">
             Fill out the form below to request a custom gift design.
           </p>
-          <form className="contact-form" onSubmit={handleSubmit}>
+          <form className="contact-form">
             <div className="form-row">
               <input
                 type="text"

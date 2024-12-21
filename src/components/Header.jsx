@@ -1,168 +1,89 @@
 import React, { useState, useEffect } from "react";
-import { HashLink as Link } from "react-router-hash-link";
 import logo from "/assets/imprintslogo.png";
-import {
-  RiArrowRightUpLine,
-  RiCloseLine,
-  RiMenuLine,
-  RiInstagramLine,
-  RiGithubLine,
-  RiDribbbleLine,
-  RiLinkedinBoxLine,
-} from "react-icons/ri";
+import { RiArrowRightUpLine, RiCloseLine, RiMenuLine } from "react-icons/ri";
 
-const ResponsiveNavbar = () => {
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Track navbar visibility
+  let lastScrollY = 0; // Track last scroll position
 
-  // Toggle menu visibility
-  const handleToggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
-
-  // Close the menu
-  const handleCloseMenu = () => {
-    setMenuVisible(false);
-  };
-
-  // Scroll handler to show/hide header
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      // Scrolling down
-      setShowHeader(false);
-    } else {
-      // Scrolling up
-      setShowHeader(true);
-    }
-    setLastScrollY(window.scrollY);
-  };
-
+  // Handle scroll behavior
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and beyond 100px
+        setIsVisible(false);
+      } else {
+        // Scrolling up
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
     };
-  }, [lastScrollY]);
+
+    const debouncedScroll = debounce(handleScroll, 100); // Debounce for performance
+    window.addEventListener("scroll", debouncedScroll);
+    return () => window.removeEventListener("scroll", debouncedScroll);
+  }, []);
+
+  // Debounce function for improved scroll performance
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), wait);
+    };
+  };
+
+  const handleToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleClose = () => {
+    setMenuOpen(false);
+  };
 
   return (
-    <header className={`header ${showHeader ? "show" : "hide"}`} id="header">
+    <header
+      className={`header ${isVisible ? "show" : "hide"}`} // Toggle visibility
+      id="header"
+    >
       <nav className="nav container">
-        <Link to="/">
-          <img className="nav__logo" src={logo} alt="Logo" />
-        </Link>
+        <img className="nav__logo" src={logo} alt="Logo" />
 
         <div
-          className={`nav__menu ${menuVisible ? "show-menu" : ""}`}
+          className={`nav__menu ${menuOpen ? "show-menu" : ""}`}
           id="nav-menu"
         >
           <ul className="nav__list">
-            <li className="nav__item">
-              <Link
-                smooth
-                to="/#home"
-                className="nav__link"
-                onClick={handleCloseMenu}
-              >
-                <RiArrowRightUpLine />
-                <span>Home</span>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link
-                smooth
-                to="/#about"
-                className="nav__link"
-                onClick={handleCloseMenu}
-              >
-                <RiArrowRightUpLine />
-                <span>Our Categories</span>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link
-                smooth
-                to="/#products"
-                className="nav__link"
-                onClick={handleCloseMenu}
-              >
-                <RiArrowRightUpLine />
-                <span>Our Clients</span>
-              </Link>
-            </li>
-
-            <li className="nav__item">
-              <Link
-                smooth
-                to="/#contact"
-                className="nav__link"
-                onClick={handleCloseMenu}
-              >
-                <RiArrowRightUpLine />
-                <span>About Us</span>
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link
-                smooth
-                to="/#contact"
-                className="nav__link"
-                onClick={handleCloseMenu}
-              >
-                <RiArrowRightUpLine />
-                <span>Contact for Bulk Orders</span>
-              </Link>
-            </li>
+            {[
+              { name: "Home", id: "home" },
+              { name: "Our Categories", id: "categories" },
+              { name: "Our Clients", id: "clients" },
+              { name: "About Us", id: "about" },
+              { name: "Contact for Bulk Orders", id: "contact" },
+            ].map((item, index) => (
+              <li className="nav__item" key={index}>
+                <a
+                  className="nav__link"
+                  href={`#${item.id}`}
+                  onClick={handleClose}
+                >
+                  <RiArrowRightUpLine />
+                  <span>{item.name}</span>
+                </a>
+              </li>
+            ))}
           </ul>
 
-          {/* Close button */}
-          <div className="nav__close" id="nav-close" onClick={handleCloseMenu}>
+          <div className="nav__close" id="nav-close" onClick={handleClose}>
             <RiCloseLine />
           </div>
-
-          {/* <div className="nav__social">
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              className="nav__social-link"
-              rel="noreferrer"
-            >
-              <RiInstagramLine />
-            </a>
-
-            <a
-              href="https://github.com/"
-              target="_blank"
-              className="nav__social-link"
-              rel="noreferrer"
-            >
-              <RiGithubLine />
-            </a>
-
-            <a
-              href="https://dribbble.com/"
-              target="_blank"
-              className="nav__social-link"
-              rel="noreferrer"
-            >
-              <RiDribbbleLine />
-            </a>
-
-            <a
-              href="https://www.linkedin.com/"
-              target="_blank"
-              className="nav__social-link"
-              rel="noreferrer"
-            >
-              <RiLinkedinBoxLine />
-            </a>
-          </div> */}
         </div>
 
-        {/* Toggle button */}
-        <div className="nav__toggle" id="nav-toggle" onClick={handleToggleMenu}>
+        <div className="nav__toggle" id="nav-toggle" onClick={handleToggle}>
           <RiMenuLine />
         </div>
       </nav>
@@ -170,4 +91,4 @@ const ResponsiveNavbar = () => {
   );
 };
 
-export default ResponsiveNavbar;
+export default Header;

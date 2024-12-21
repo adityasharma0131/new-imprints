@@ -1,6 +1,5 @@
 /*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant:ital,wght@0,300..700;1,300..700&family=Nanum+Myeongjo&display=swap");
-/*=============== BASE ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cormorant:ital,wght@0,300..700;1,300..700&family=Manrope:wght@200..800&family=Nanum+Myeongjo&display=swap"); /*=============== BASE ===============*/
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,7 +10,7 @@ html {
 }
 
 ::placeholder {
-  font-family: "Nanum Myeongjo", serif;
+  font-family: "Alata", serif;
 }
 *::selection {
   background: #742a2a;
@@ -31,7 +30,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 body {
-  font-family: "Nanum Myeongjo", serif;
+  font-family: "Alata", serif;
   font-size: 0.938rem;
   background-color: #fff;
 }
@@ -54,11 +53,19 @@ a {
 
 .header {
   position: fixed;
-  width: 100%;
   top: 0;
-  left: 0;
-  background-color: #ffff;
-  z-index: 100;
+  width: 100%;
+  transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.header.hide {
+  transform: translateY(-100%); /* Moves header off-screen */
+}
+
+.header.show {
+  transform: translateY(0); /* Resets position */
 }
 
 .nav {
@@ -312,48 +319,137 @@ a {
 }
 
 /*=============== POPULAR CATEGORIES SECTION ===============*/
+.categories-container {
+  text-align: center;
+  padding: 20px;
+}
 
+.categories-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Centers the items horizontally */
+  margin-top: 20px;
+}
+
+.category-border {
+  border: 2px solid #000; /* Add the border */
+  padding: 10px; /* Space between the border and content */
+  background-color: #fff; /* Ensure the background is white */
+}
+
+.category-item {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.category-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.category-item p {
+  font-size: 26px;
+  padding: 10px 0;
+  color: #830406;
+}
 /*=============== EST SELLING PRODUCT SECTION ===============*/
 
 /*=============== ABOUT US SECTION ===============*/
+/* About Section */
 .about-section {
+  background-color: #fff;
+  padding: 60px 20px; /* Adds spacing around the section */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.about-us {
+
+.about-container {
+  max-width: 1200px;
   display: flex;
+  flex-wrap: wrap; /* Ensures responsiveness for smaller screens */
+  gap: 40px;
   align-items: center;
-  justify-content: center;
-  background-color: #f0faf8;
-  padding: 1rem;
-  margin: 1rem;
-  max-width: 100%;
-  border-radius: 8px;
 }
 
 .about-content {
-  text-align: center; /* Centering text within the content */
+  flex: 1;
+  min-width: 300px; /* Ensures the content stays readable on smaller screens */
+}
+
+.heading1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #8b0000; /* Matches the brand color */
+  margin-bottom: 10px;
 }
 
 .about-title {
-  font-size: 2em;
-  color: #742a2a; /* Darker color for the title */
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.about-subtitle {
-  font-size: 1.5em;
-  color: #742a2a; /* Earthy brown color for subtitle */
-  margin-bottom: 15px;
-  font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .about-description {
-  font-size: 1em;
-  color: #333; /* Darker text color for readability */
+  font-size: 1rem;
   line-height: 1.6;
+  color: #834802;
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column; /* Stacks content vertically */
+    text-align: center;
+  }
+
+  .about-title {
+    font-size: 2rem; /* Reduce size for smaller screens */
+  }
+
+  .about-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .about-description {
+    font-size: 0.85rem;
+  }
+
+  .about-img {
+    width: 90%; /* Ensures image doesn't overflow */
+  }
 }
 
 /*=============== OUR CLIENTS SECTION ===============*/
@@ -400,7 +496,6 @@ a {
 .logos-slide .item {
   height: 100px;
   margin: 0 20px;
-  filter: grayscale(1);
   transition: filter 0.3s ease;
 }
 
@@ -540,33 +635,28 @@ a {
 
 /*=============== CONTACT SECTION ===============*/
 
+/* Contact Section Styles */
 .contact {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 239, 209, 1) 34%,
-    rgba(255, 255, 255, 1) 100%
-  );
   padding: 5rem 1rem;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-radius: 10px;
 }
 
 .contact-container {
   margin: 0 auto;
   max-width: 800px;
-  padding: 0 20px; /* Responsive padding */
+  padding: 0 20px;
 }
 
 .contact-heading {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
   color: #742a2a;
 }
 
 .contact-subheading {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 2rem;
   color: #742a2a;
 }
@@ -588,24 +678,26 @@ a {
   flex: 1;
   padding: 0.8rem;
   border: 2px solid #742a2a;
-  border-radius: 25px;
+  border-radius: 5px;
   font-size: 1rem;
   color: #742a2a;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-input::placeholder {
-  color: #212121;
+  color: #7f7a7a;
 }
 
 .form-input:focus {
   border-color: #742a2a;
+  box-shadow: 0 0 5px rgba(116, 42, 42, 0.3);
 }
 
 .full-width {
   width: 100%;
 }
+
 .contact-button {
   display: flex;
   justify-content: center;
@@ -624,23 +716,36 @@ a {
 }
 
 .submit-button:hover {
-  background-color: #6b1d1d; /* Slightly lighter shade on hover */
+  background-color: #6b1d1d;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .contact-container {
-    padding: 0 10px; /* Narrower padding on medium screens */
+    padding: 0 10px;
   }
 
   .form-row {
     flex-direction: column;
   }
+
+  .contact-heading {
+    font-size: 2rem;
+  }
+
+  .contact-subheading {
+    font-size: 1rem;
+  }
+
+  .submit-button {
+    width: 70%;
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 480px) {
   .contact-heading {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   .contact-subheading {
@@ -648,7 +753,7 @@ a {
   }
 
   .submit-button {
-    padding: 0.7rem 1.5rem;
+    width: 80%;
     font-size: 0.9rem;
   }
 }
