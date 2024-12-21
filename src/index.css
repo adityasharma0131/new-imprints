@@ -53,19 +53,12 @@ a {
 
 .header {
   position: fixed;
-  top: 0;
   width: 100%;
+  top: 0;
+  left: 0;
   transition: transform 0.3s ease-in-out;
   background-color: #fff;
-  z-index: 1000;
-}
-
-.header.hide {
-  transform: translateY(-100%); /* Moves header off-screen */
-}
-
-.header.show {
-  transform: translateY(0); /* Resets position */
+  z-index: 100;
 }
 
 .nav {
