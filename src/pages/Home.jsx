@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast"; // For notifications
+import { MdDesignServices } from "react-icons/md";
+import { IoRibbon } from "react-icons/io5";
+import { FaTruckFast } from "react-icons/fa6";
+import { RiDiscountPercentFill } from "react-icons/ri";
+
 import corporategifting from "/assets/Corporategifting.png";
 import aboutus from "/assets/aboutus.png";
-import stationery from "/assets/Stationery.png";
-import electronics from "/assets/Electronics.png";
-import { HashLink as Link } from "react-router-hash-link";
-
 import Corporate from "/assets/Corporategifting.png";
 import OfficeEssentials from "/assets/OfficeEssentials.png";
 import Electronics from "/assets/Electronics.png";
@@ -26,28 +27,8 @@ import client12 from "/assets/client12.png";
 import client13 from "/assets/client13.png";
 import client14 from "/assets/client14.png";
 import client15 from "/assets/client15.png";
-import { MdDesignServices } from "react-icons/md";
-import { IoRibbon } from "react-icons/io5";
-import { FaTruckFast } from "react-icons/fa6";
-import { RiDiscountPercentFill } from "react-icons/ri";
 
 const Home = () => {
-  const clientImages = [
-    client1,
-    client4,
-    client5,
-    client6,
-    client7,
-    client8,
-    client9,
-    client10,
-    client11,
-    client12,
-    client13,
-    client14,
-    client15,
-  ];
-
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -75,33 +56,58 @@ const Home = () => {
     { name: "Leather Products", image: LeatherProducts },
   ];
 
+  const clientImages = [
+    client1,
+    client4,
+    client5,
+    client6,
+    client7,
+    client8,
+    client9,
+    client10,
+    client11,
+    client12,
+    client13,
+    client14,
+    client15,
+  ];
+
   return (
     <>
-      {/* HOME SECTION  */}
-      <div className="homepage" id="home" ></div>
+      {/* HOME SECTION */}
+      <div className="homepage" id="home"></div>
 
+      {/* WHY CHOOSE US SECTION */}
       <div className="whyus">
         <h1 className="heading1">Why Choose Us</h1>
         <div className="pointers">
-          <div className="sec">
-            <MdDesignServices className="hero-icon" />
-            <h2>Unmatched Customization</h2>
-          </div>
-          <div className="sec">
-            <IoRibbon className="hero-icon" />
-            <h2>High-Quality Products</h2>
-          </div>
-          <div className="sec">
-            <FaTruckFast className="hero-icon" />
-            <h2>Timely & PAN India Delivery</h2>
-          </div>
-          <div className="sec">
-            <RiDiscountPercentFill className="hero-icon" />
-            <h2>Discount on Bulk Orders</h2>
-          </div>
+          {[
+            {
+              icon: <MdDesignServices className="hero-icon" />,
+              title: "Unmatched Customization",
+            },
+            {
+              icon: <IoRibbon className="hero-icon" />,
+              title: "High-Quality Products",
+            },
+            {
+              icon: <FaTruckFast className="hero-icon" />,
+              title: "Timely & PAN India Delivery",
+            },
+            {
+              icon: <RiDiscountPercentFill className="hero-icon" />,
+              title: "Discount on Bulk Orders",
+            },
+          ].map((item, index) => (
+            <div className="sec" key={index}>
+              {item.icon}
+              <h2>{item.title}</h2>
+            </div>
+          ))}
         </div>
       </div>
 
+      {/* CATEGORIES SECTION */}
       <div className="categories-container" id="categories">
         <h1 className="heading1">Our Categories</h1>
         <div className="categories-flex">
@@ -116,6 +122,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* CLIENTS SECTION */}
       <div className="clients" id="clients">
         <h1 className="heading1">Clients That Trust Us</h1>
         <div className="slider">
@@ -134,6 +141,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* ABOUT US SECTION */}
       <div className="about-section" id="about">
         <h2 className="heading1">About Us</h2>
         <div className="about-container">
@@ -159,6 +167,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* CONTACT FORM SECTION */}
       <div className="contact" id="contact">
         <Toaster />
         <div className="contact-container">
