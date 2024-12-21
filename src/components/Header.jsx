@@ -4,38 +4,21 @@ import { RiArrowRightUpLine, RiCloseLine, RiMenuLine } from "react-icons/ri";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // Track navbar visibility
-  let lastScrollY = 0; // Track last scroll position
-
-  // Handle scroll behavior
+  const [scrollDirection, setScrollDirection] = useState("up");
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down and beyond 100px
-        setIsVisible(false);
+      if (window.scrollY > lastScrollY) {
+        setScrollDirection("down");
       } else {
-        // Scrolling up
-        setIsVisible(true);
+        setScrollDirection("up");
       }
-
-      lastScrollY = currentScrollY;
+      lastScrollY = window.scrollY;
     };
-
-    const debouncedScroll = debounce(handleScroll, 100); // Debounce for performance
-    window.addEventListener("scroll", debouncedScroll);
-    return () => window.removeEventListener("scroll", debouncedScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Debounce function for improved scroll performance
-  const debounce = (func, wait) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
-    };
-  };
 
   const handleToggle = () => {
     setMenuOpen(!menuOpen);
@@ -47,7 +30,7 @@ const Header = () => {
 
   return (
     <header
-      className={`header ${isVisible ? "show" : "hide"}`} // Toggle visibility
+      className={`header ${scrollDirection === "down" ? "hide" : ""}`}
       id="header"
     >
       <nav className="nav container">

@@ -56,17 +56,16 @@ a {
   width: 100%;
   top: 0;
   left: 0;
-  transition: transform 0.3s ease-in-out;
-  background-color: #fff;
+  background-color: aliceblue;
+
   z-index: 100;
+}
+.header {
+  transition: transform 0.3s ease;
 }
 
 .header.hide {
-  transform: translateY(-100%); /* Moves header off-screen */
-}
-
-.header.show {
-  transform: translateY(0); /* Resets position */
+  transform: translateY(-100%);
 }
 
 .nav {
@@ -79,7 +78,6 @@ a {
 
 .nav__logo {
   color: #742a2a;
-  font-weight: 500;
 }
 
 .nav__close,
@@ -146,7 +144,6 @@ a {
   position: relative;
   color: #742a2a;
   font-size: 1.5rem;
-  font-weight: 700;
   display: inline-flex;
   align-items: center;
   transition: opacity 0.4s;
@@ -359,7 +356,7 @@ a {
 }
 
 .category-item p {
-  font-size: 26px;
+  font-size: 20px;
   padding: 10px 0;
   color: #830406;
 }
@@ -391,15 +388,14 @@ a {
 
 .heading1 {
   font-size: 1.5rem;
-  font-weight: bold;
   color: #8b0000; /* Matches the brand color */
   margin-bottom: 10px;
 }
 
 .about-title {
   font-size: 2.5rem;
-  font-weight: 700;
   color: #333;
+  font-weight: 100;
   margin-bottom: 20px;
 }
 
@@ -426,7 +422,7 @@ a {
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .about-container {
-    flex-direction: column; /* Stacks content vertically */
+    flex-direction: column-reverse;
     text-align: center;
   }
 
@@ -470,7 +466,6 @@ a {
   font-size: 2em;
   color: #742a2a; /* Darker color for the title */
   margin-bottom: 10px;
-  font-weight: bold;
 }
 .slider {
   width: 100%;
@@ -829,9 +824,8 @@ a {
 }
 
 .footer-title {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  font-weight: bold;
 }
 .footer-links {
   list-style: none; /* Remove default bullets */
@@ -849,7 +843,6 @@ a {
 .footer-links a {
   text-decoration: none; /* Remove underline */
   color: #fff; /* Set link color (adjust as needed) */
-  font-weight: 600; /* Make text slightly bold */
   transition: color 0.3s ease; /* Smooth transition for hover effect */
 }
 
@@ -859,7 +852,6 @@ a {
 
 .footer-description {
   margin: 0;
-  font-weight: bold;
   line-height: 1.5;
 }
 
@@ -886,7 +878,6 @@ a {
 }
 
 .footer-bottom p {
-  font-weight: 900;
   margin: 0;
 }
 
