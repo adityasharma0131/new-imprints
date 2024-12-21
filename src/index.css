@@ -61,8 +61,6 @@ a {
   z-index: 100;
 }
 
-
-
 .header.hide {
   transform: translateY(-100%); /* Moves header off-screen */
 }
@@ -70,7 +68,6 @@ a {
 .header.show {
   transform: translateY(0); /* Resets position */
 }
-
 
 .nav {
   position: relative;
